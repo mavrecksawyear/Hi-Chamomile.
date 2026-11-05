@@ -1,0 +1,30 @@
+<audio id="music" loop preload="auto">
+  <source src="./turning-page.mp3" type="audio/mpeg">
+</audio>
+function startMusic() {
+  const audio = document.getElementById('music');
+
+  audio.play()
+    .then(() => {
+      musicBtn.textContent = 'Ⅱ';
+      go('password');
+    })
+    .catch((error) => {
+      alert('Musik belum bisa diputar. Periksa file turning-page.mp3 di GitHub.');
+      console.error('Audio error:', error);
+    });
+}
+
+musicBtn.addEventListener('click', async () => {
+  if (audio.paused) {
+    try {
+      await audio.play();
+      musicBtn.textContent = 'Ⅱ';
+    } catch (error) {
+      alert('Musik belum bisa diputar. Periksa file MP3 di repository.');
+    }
+  } else {
+    audio.pause();
+    musicBtn.textContent = '▶';
+  }
+});
